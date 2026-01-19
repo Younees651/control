@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lycée Chammakh</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+<header>
+  <nav>
+    <a href="#" onclick="showSection('home')" data-fr="Accueil" data-ar="الرئيسية">
+      <i class="fas fa-home"></i> <span>Accueil</span>
+    </a>
+    <a href="#" onclick="showSection('news')" data-fr="Actualités" data-ar="الأخبار">
+      <i class="fas fa-newspaper"></i> <span>Actualités</span>
+    </a>
+    <a href="#" onclick="showSection('about')" data-fr="À propos" data-ar="حول المعهد">
+      <i class="fas fa-info-circle"></i> <span>À propos</span>
+    </a>
+    <a href="admin.html" data-fr="Panneau Admin" data-ar="لوحة التحكم">
+      <i class="fas fa-cogs"></i> <span>Panneau Admin</span>
+    </a>
+  </nav>
+  
+  <button class="lang-switcher" onclick="switchLanguage()">
+    <i class="fas fa-language"></i> <span class="lang-text">العربية</span>
+  </button>
+</header>
+
+<div class="container">
+  <!-- Sidebar pour les sections -->
+  <aside>
+    <h3 data-fr="Sections" data-ar="الأقسام">
+      <i class="fas fa-list-alt"></i> <span>Sections</span>
+    </h3>
+
+    <button onclick="toggleSub('firstSec')" data-fr="Première année" data-ar="أولى ثانوي">
+      <i class="fas fa-graduation-cap"></i> <span>Première année</span>
+    </button>
+    <div id="firstSec" class="sub">
+      <a href="#" onclick="showSection('first1')" data-fr="Première 1" data-ar="أولى ثانوي 1">
+        <i class="fas fa-chevron-right"></i> <span>Première 1</span>
+      </a>
+      <a href="#" onclick="showSection('first2')" data-fr="Première 2" data-ar="أولى ثانوي 2">
+        <i class="fas fa-chevron-right"></i> <span>Première 2</span>
+      </a>
+      <a href="#" onclick="showSection('first3')" data-fr="Première 3" data-ar="أولى ثانوي 3">
+        <i class="fas fa-chevron-right"></i> <span>Première 3</span>
+      </a>
+      <a href="#" onclick="showSection('first4')" data-fr="Première 4" data-ar="أولى ثانوي 4">
+        <i class="fas fa-chevron-right"></i> <span>Première 4</span>
+      </a>
+    </div>
+
+    <button onclick="toggleSub('secondSec')" data-fr="Deuxième année" data-ar="ثانية ثانوي">
+      <i class="fas fa-book-open"></i> <span>Deuxième année</span>
+    </button>
+    <div id="secondSec" class="sub">
+      <a href="#" onclick="showSection('second1')" data-fr="Sciences" data-ar="ثانية علوم">
+        <i class="fas fa-flask"></i> <span>Sciences</span>
+      </a>
+      <a href="#" onclick="showSection('second2')" data-fr="Économie 1" data-ar="ثانية اقتصاد1">
+        <i class="fas fa-chart-line"></i> <span>Économie 1</span>
+      </a>
+      <a href="#" onclick="showSection('second3')" data-fr="Économie 2" data-ar="ثانية اقتصاد2">
+        <i class="fas fa-chart-bar"></i> <span>Économie 2</span>
+      </a>
+      <a href="#" onclick="showSection('second4')" data-fr="Informatique" data-ar="ثانية تك.الاعلامية">
+        <i class="fas fa-laptop-code"></i> <span>Informatique</span>
+      </a>
+    </div>
+
+    <button onclick="toggleSub('thirdSec')" data-fr="Troisième année" data-ar="ثالثة ثانوي">
+      <i class="fas fa-user-graduate"></i> <span>Troisième année</span>
+    </button>
+    <div id="thirdSec" class="sub">
+      <a href="#" onclick="showSection('third1')" data-fr="Informatique" data-ar="ثالثة INFORMATIQUE">
+        <i class="fas fa-code"></i> <span>Informatique</span>
+      </a>
+      <a href="#" onclick="showSection('third2')" data-fr="Économie" data-ar="ثالثة اقتصاد">
+        <i class="fas fa-coins"></i> <span>Économie</span>
+      </a>
+    </div>
+
+    <button onclick="toggleSub('bacSec')" data-fr="Baccalauréat" data-ar="باكالوريا">
+      <i class="fas fa-award"></i> <span>Baccalauréat</span>
+    </button>
+    <div id="bacSec" class="sub">
+      <a href="#" onclick="showSection('bac1')" data-fr="Bac Éco 1" data-ar="باك اقتصاد1">
+        <i class="fas fa-file-contract"></i> <span>Bac Éco 1</span>
+      </a>
+      <a href="#" onclick="showSection('bac2')" data-fr="Bac Éco 2" data-ar="باك اقتصاد2">
+        <i class="fas fa-file-signature"></i> <span>Bac Éco 2</span>
+      </a>
+      <a href="#" onclick="showSection('bac3')" data-fr="Bac Sciences" data-ar="باك علوم">
+        <i class="fas fa-microscope"></i> <span>Bac Sciences</span>
+      </a>
+    </div>
+  </aside>
+
+  <!-- Main content -->
+  <main>
+    <!-- Page d'accueil -->
+    <section id="home" class="centered">
+      <h1 data-fr="Bienvenue au Lycée Chammakh" data-ar="مرحباً بكم في معهد شماخ">
+        <i class="fas fa-school"></i> <span>Bienvenue au Lycée Chammakh</span>
+      </h1>
+      <p data-fr="Votre établissement d'excellence pour un avenir brillant" data-ar="مؤسستكم للتميز لمستقبل مشرق">
+        Votre établissement d'excellence pour un avenir brillant
+      </p>
+      <div class="welcome-icons">
+        <div class="icon-box">
+          <i class="fas fa-graduation-cap"></i>
+          <h4 data-fr="Excellence" data-ar="التميز">Excellence</h4>
+        </div>
+        <div class="icon-box">
+          <i class="fas fa-users"></i>
+          <h4 data-fr="Communauté" data-ar="المجتمع">Communauté</h4>
+        </div>
+        <div class="icon-box">
+          <i class="fas fa-lightbulb"></i>
+          <h4 data-fr="Innovation" data-ar="الابتكار">Innovation</h4>
+        </div>
+      </div>
+      <div id="homeNews"></div>
+    </section>
+
+    <!-- À propos -->
+    <section id="about" class="centered hidden">
+      <h1 data-fr="À propos" data-ar="حول المعهد">
+        <i class="fas fa-info-circle"></i> <span>À propos</span>
+      </h1>
+      <div class="about-content">
+        <p data-fr="Le Lycée Chammakh est un établissement d'enseignement secondaire réputé pour son excellence académique et son engagement envers le développement des étudiants." data-ar="معهد شماخ هو مؤسسة تعليمية ثانوية معروفة بتميزها الأكاديمي والتزامها بتطوير الطلاب.">
+          Le Lycée Chammakh est un établissement d'enseignement secondaire réputé pour son excellence académique et son engagement envers le développement des étudiants.
+        </p>
+        <div class="dev-team">
+          <h3 data-fr="Développé par :" data-ar="تم التطوير بواسطة :">Développé par :</h3>
+          <div class="dev-card">
+            <i class="fas fa-user-circle"></i>
+            <h4>@yassine</h4>
+          </div>
+          <div class="dev-card">
+            <i class="fas fa-user-circle"></i>
+            <h4>@younes</h4>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Actualités générales -->
+    <section id="news" class="hidden">
+      <h1 data-fr="Actualités et Publications" data-ar="الأخبار والمنشورات">
+        <i class="fas fa-newspaper"></i> <span>Actualités et Publications</span>
+      </h1>
+      <div id="allNews"></div>
+    </section>
+
+    <!-- Sections spécifiques -->
+    <section id="first1" class="hidden"><h1 data-fr="Première 1" data-ar="أولى ثانوي 1">Première 1</h1><div id="first1News"></div></section>
+    <section id="first2" class="hidden"><h1 data-fr="Première 2" data-ar="أولى ثانوي 2">Première 2</h1><div id="first2News"></div></section>
+    <section id="first3" class="hidden"><h1 data-fr="Première 3" data-ar="أولى ثانوي 3">Première 3</h1><div id="first3News"></div></section>
+    <section id="first4" class="hidden"><h1 data-fr="Première 4" data-ar="أولى ثانوي 4">Première 4</h1><div id="first4News"></div></section>
+
+    <section id="second1" class="hidden"><h1 data-fr="Deuxième Sciences" data-ar="ثانية علوم">Deuxième Sciences</h1><div id="second1News"></div></section>
+    <section id="second2" class="hidden"><h1 data-fr="Deuxième Éco 1" data-ar="ثانية اقتصاد1">Deuxième Éco 1</h1><div id="second2News"></div></section>
+    <section id="second3" class="hidden"><h1 data-fr="Deuxième Éco 2" data-ar="ثانية اقتصاد2">Deuxième Éco 2</h1><div id="second3News"></div></section>
+    <section id="second4" class="hidden"><h1 data-fr="Deuxième Info" data-ar="ثانية INFORMATIQUE">Deuxième Info</h1><div id="second4News"></div></section>
+
+    <section id="third1" class="hidden"><h1 data-fr="Troisième Info" data-ar="ثالثة INFORMATIQUE">Troisième Info</h1><div id="third1News"></div></section>
+    <section id="third2" class="hidden"><h1 data-fr="Troisième Éco" data-ar="ثالثة اقتصاد">Troisième Éco</h1><div id="third2News"></div></section>
+
+    <section id="bac1" class="hidden"><h1 data-fr="Bac Éco 1" data-ar="باك اقتصاد1">Bac Éco 1</h1><div id="bac1News"></div></section>
+    <section id="bac2" class="hidden"><h1 data-fr="Bac Éco 2" data-ar="باك اقتصاد2">Bac Éco 2</h1><div id="bac2News"></div></section>
+    <section id="bac3" class="hidden"><h1 data-fr="Bac Sciences" data-ar="باك علوم">Bac Sciences</h1><div id="bac3News"></div></section>
+  </main>
+</div>
+
+<script src="script.js"></script>
+<script>
+  let currentLang = 'fr'; // Langue par défaut
+  
+  function switchLanguage() {
+    const langBtn = document.querySelector('.lang-switcher');
+    const langText = document.querySelector('.lang-text');
+    
+    if (currentLang === 'fr') {
+      // Passer à l'arabe
+      document.documentElement.lang = 'ar';
+      document.documentElement.dir = 'rtl';
+      document.title = 'معهد شماخ';
+      langText.textContent = 'Français';
+      currentLang = 'ar';
+    } else {
+      // Passer au français
+      document.documentElement.lang = 'fr';
+      document.documentElement.dir = 'ltr';
+      document.title = 'Lycée Chammakh';
+      langText.textContent = 'العربية';
+      currentLang = 'fr';
+    }
+    
+    // Mettre à jour tous les textes
+    updateTexts();
+  }
+  
+  function updateTexts() {
+    // Mettre à jour tous les éléments avec des attributs data-fr et data-ar
+    document.querySelectorAll('[data-fr]').forEach(el => {
+      const span = el.querySelector('span');
+      if (span) {
+        span.textContent = currentLang === 'fr' ? el.getAttribute('data-fr') : el.getAttribute('data-ar');
+      } else {
+        el.textContent = currentLang === 'fr' ? el.getAttribute('data-fr') : el.getAttribute('data-ar');
+      }
+    });
+  }
+  
+  loadNews(); // Charger les actualités au chargement de la page
+  updateTexts(); // Initialiser les textes
+</script>
+</body>
+</html>

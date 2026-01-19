@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title data-fr="Panneau d'administration" data-ar="لوحة التحكم">Panneau d'administration</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+  /* Écran de connexion moderne */
+  #loginBox{
+    max-width:450px;
+    margin:100px auto;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 40px;
+    border-radius: 25px;
+    text-align:center;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    animation: fadeIn 0.5s ease;
+  }
+  
+  #adminPanel{display:none;}
+  
+  input, textarea, select {
+    width:100%;
+    padding:15px;
+    margin-top:15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    background: white;
+  }
+  
+  input:focus, textarea:focus, select:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    outline: none;
+  }
+  
+  .bt{
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    margin-top: 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 18px;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .bt:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+  }
+  
+  .warning-box {
+    background: linear-gradient(45deg, #ff7e5f, #feb47b);
+    color: white;
+    padding: 20px;
+    border-radius: 15px;
+    margin: 20px 0;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  
+  .admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .admin-nav {
+    display: flex;
+    gap: 15px;
+  }
+  
+  .admin-nav a {
+    padding: 10px 20px;
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    color: white;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+  
+  .admin-nav a:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+  }
+  
+  .admin-main {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Icônes dans les options */
+  option[value]::before {
+    content: "📝 ";
+  }
+  
+  option[value="home"]::before {
+    content: "🏠 ";
+  }
+  
+  option[value*="first"]::before {
+    content: "🎓 ";
+  }
+  
+  option[value*="second"]::before {
+    content: "📚 ";
+  }
+  
+  option[value*="third"]::before {
+    content: "🌟 ";
+  }
+  
+  option[value*="bac"]::before {
+    content: "🏆 ";
+  }
+</style>
+</head>
+
+<body>
+<button class="lang-switcher" onclick="switchLanguage()">
+  <i class="fas fa-language"></i> <span class="lang-text">العربية</span>
+</button>
+
+<!-- 🔐 Écran de connexion -->
+<div id="loginBox" >
+  <div class="welcome-admin">
+    <i class="fas fa-lock fa-3x" style="color: #667eea; margin-bottom: 20px;"></i>
+    <h1 data-fr="Connexion Admin" data-ar="دخول الأدمن">Connexion Admin</h1>
+  </div>
+  
+  <div class="warning-box">
+    <i class="fas fa-exclamation-triangle"></i>
+    <strong data-fr="Avertissement*" data-ar="تنبيه*">Avertissement*</strong>
+    <p data-fr="Cette page est réservée à la gestion du contenu de l'établissement. Seuls les administrateurs autorisés peuvent y accéder ou la modifier. Toute utilisation non autorisée expose son auteur à des poursuites. Il s'agit d'un panneau de contrôle privé de l'établissement. L'accès ou la modification est interdit aux non-administrateurs. Toutes les opérations sont enregistrées." data-ar="هذه الصفحة مخصّصة لإدارة محتوى المعهد، ولا يُسمح بالدخول أو التعديل إلا للأدمن المخوّل. أي استعمال غير مصرح به يُعرّض صاحبه للمساءلة. هذه لوحة تحكم خاصة بالمعهد. يُمنع الدخول أو التعديل لغير الأدمن. جميع العمليات يتم تسجيلها">
+      Cette page est réservée à la gestion du contenu de l'établissement. Seuls les administrateurs autorisés peuvent y accéder ou la modifier.
+    </p>
+  </div>
+  
+  <input type="password" id="adminCode" data-fr-placeholder="Entrez le code d'accès" data-ar-placeholder="اكتب كود الدخول" placeholder="Entrez le code d'accès">
+  <br><br>
+  
+  <button onclick="checkCode()" class="bt">
+    <i class="fas fa-sign-in-alt"></i>
+    <span data-fr="Connexion" data-ar="دخول">Connexion</span>
+  </button>
+  
+  <p id="error" style="color: #ff7e5f; margin-top: 15px; font-weight: 600;"></p>
+</div>
+
+<!-- ✅ Panneau d'administration -->
+<div id="adminPanel">
+  <div class="admin-header">
+    <h1 data-fr="Panneau de Contrôle Administratif" data-ar="لوحة التحكم الإدارية">
+      <i class="fas fa-cogs"></i> <span>Panneau de Contrôle Administratif</span>
+    </h1>
+    
+    <div class="admin-nav">
+      <a href="index.html" data-fr="Retour au site" data-ar="الرجوع للموقع">
+        <i class="fas fa-home"></i> <span>Retour au site</span>
+      </a>
+      <a href="#" onclick="logout()" data-fr="Déconnexion" data-ar="تسجيل الخروج">
+        <i class="fas fa-sign-out-alt"></i> <span>Déconnexion</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="admin-main">
+    <div class="form-group">
+      <h3 data-fr="Ajouter une nouvelle actualité" data-ar="إضافة خبر جديد">
+        <i class="fas fa-plus-circle"></i> <span>Ajouter une nouvelle actualité</span>
+      </h3>
+      
+      <textarea id="newsText" rows="4" data-fr-placeholder="Écrivez votre actualité ici..." data-ar-placeholder="اكتب الخبر هنا..." placeholder="Écrivez votre actualité ici..."></textarea>
+      <br><br>
+
+      <label data-fr="Choisissez la section:" data-ar="اختر القسم:">
+        <i class="fas fa-folder-open"></i> <span>Choisissez la section:</span>
+      </label><br>
+      <select id="newsSection">
+        <option value="home" data-fr="Accueil" data-ar="الرئيسية">🏠 Accueil</option>
+        <option value="first1" data-fr="Première 1" data-ar="أولى ثانوي 1">🎓 Première 1</option>
+        <option value="first2" data-fr="Première 2" data-ar="أولى ثانوي 2">🎓 Première 2</option>
+        <option value="first3" data-fr="Première 3" data-ar="أولى ثانوي 3">🎓 Première 3</option>
+        <option value="first4" data-fr="Première 4" data-ar="أولى ثانوي 4">🎓 Première 4</option>
+        <option value="second1" data-fr="Deuxième Sciences" data-ar="ثانية علوم">📚 Deuxième Sciences</option>
+        <option value="second2" data-fr="Deuxième Éco 1" data-ar="ثانية اقتصاد1">📚 Deuxième Éco 1</option>
+        <option value="second3" data-fr="Deuxième Éco 2" data-ar="ثانية اقتصاد2">📚 Deuxième Éco 2</option>
+        <option value="second4" data-fr="Deuxième Info" data-ar="ثانية INFORMATIQUE">📚 Deuxième Info</option>
+        <option value="third1" data-fr="Troisième Info" data-ar="ثالثة INFORMATIQUE">🌟 Troisième Info</option>
+        <option value="third2" data-fr="Troisième Éco" data-ar="ثالثة اقتصاد">🌟 Troisième Éco</option>
+        <option value="bac1" data-fr="Bac Éco 1" data-ar="باك اقتصاد1">🏆 Bac Éco 1</option>
+        <option value="bac2" data-fr="Bac Éco 2" data-ar="باك اقتصاد2">🏆 Bac Éco 2</option>
+        <option value="bac3" data-fr="Bac Sciences" data-ar="باك علوم">🏆 Bac Sciences</option>
+      </select>
+      <br><br>
+
+      <button onclick="addNews()" class="bt">
+        <i class="fas fa-paper-plane"></i>
+        <span data-fr="Publier l'actualité" data-ar="نشر الخبر">Publier l'actualité</span>
+      </button>
+    </div>
+
+    <hr style="margin: 40px 0; border: 1px solid #e0e0e0;">
+
+    <div class="current-news">
+      <h3 data-fr="Actualités en ligne" data-ar="الأخبار الحالية">
+        <i class="fas fa-list-alt"></i> <span>Actualités en ligne</span>
+      </h3>
+      <div id="adminNews"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+let currentLang = 'fr'; // Langue par défaut
+const ADMIN_CODE = "19202009"; // 🔐 Code d'accès
+
+// Changer de langue
+function switchLanguage() {
+  const langBtn = document.querySelector('.lang-switcher');
+  const langText = document.querySelector('.lang-text');
+  
+  if (currentLang === 'fr') {
+    // Passer à l'arabe
+    document.documentElement.lang = 'ar';
+    document.documentElement.dir = 'rtl';
+    document.title = 'لوحة التحكم';
+    langText.textContent = 'Français';
+    currentLang = 'ar';
+  } else {
+    // Passer au français
+    document.documentElement.lang = 'fr';
+    document.documentElement.dir = 'ltr';
+    document.title = 'Panneau d\'administration';
+    langText.textContent = 'العربية';
+    currentLang = 'fr';
+  }
+  
+  // Mettre à jour tous les textes
+  updateTexts();
+}
+
+// Mettre à jour tous les textes
+function updateTexts() {
+  // Mettre à jour le texte des éléments
+  document.querySelectorAll('[data-fr]').forEach(el => {
+    const span = el.querySelector('span');
+    if (span) {
+      span.textContent = currentLang === 'fr' ? el.getAttribute('data-fr') : el.getAttribute('data-ar');
+    } else {
+      el.textContent = currentLang === 'fr' ? el.getAttribute('data-fr') : el.getAttribute('data-ar');
+    }
+  });
+  
+  // Mettre à jour les placeholders
+  document.querySelectorAll('[data-fr-placeholder]').forEach(el => {
+    el.placeholder = currentLang === 'fr' ? el.getAttribute('data-fr-placeholder') : el.getAttribute('data-ar-placeholder');
+  });
+  
+  // Mettre à jour les options du select
+  document.querySelectorAll('#newsSection option').forEach(option => {
+    if (option.getAttribute('data-fr')) {
+      option.textContent = currentLang === 'fr' ? option.getAttribute('data-fr') : option.getAttribute('data-ar');
+    }
+  });
+}
+
+// Vérifier le code
+function checkCode(){
+  let input = document.getElementById("adminCode").value;
+  if(input === ADMIN_CODE){
+    localStorage.setItem("adminLogged","yes");
+    showAdmin();
+  } else {
+    const errorMsg = currentLang === 'fr' 
+      ? "❌ Code incorrect, veuillez quitter immédiatement" 
+      : "❌ الكود غير صحيح ,الرجاء الخروج فورا";
+    document.getElementById("error").innerText = errorMsg;
+  }
+}
+
+// Afficher le panneau d'administration
+function showAdmin(){
+  document.getElementById("loginBox").style.display="none";
+  document.getElementById("adminPanel").style.display="block";
+  loadAdminNews();
+}
+
+// Déconnexion
+function logout(){
+  localStorage.removeItem("adminLogged");
+  location.reload();
+}
+
+// Au chargement de la page
+if(localStorage.getItem("adminLogged")==="yes"){
+  showAdmin();
+}
+
+// ===== Système d'actualités =====
+function getNews(){
+  return JSON.parse(localStorage.getItem("news")) || [];
+}
+
+function saveNews(news){
+  localStorage.setItem("news", JSON.stringify(news));
+}
+
+function addNews(){
+  let text = newsText.value;
+  let section = newsSection.value;
+  
+  const alertMsg = currentLang === 'fr' 
+    ? "Veuillez écrire l'actualité avant de publier" 
+    : "الرجاء كتابة الخبر قبل النشر";
+    
+  if(text==="") return alert(alertMsg);
+
+  let d = new Date();
+  let date = d.toLocaleString(currentLang === 'fr' ? "fr-FR" : "ar-TN");
+
+  let news = getNews();
+  news.push({text, date, section});
+  saveNews(news);
+  newsText.value="";
+  loadAdminNews();
+}
+
+function deleteNews(i){
+  const confirmMsg = currentLang === 'fr' 
+    ? "Voulez-vous vraiment supprimer cette actualité ?" 
+    : "هل تريد حقاً حذف هذا الخبر؟";
+    
+  if(confirm(confirmMsg)) {
+    let news = getNews();
+    news.splice(i,1);
+    saveNews(news);
+    loadAdminNews();
+  }
+}
+
+function loadAdminNews(){
+  adminNews.innerHTML="";
+  const news = getNews();
+  
+  if (news.length === 0) {
+    const noNewsMsg = currentLang === 'fr' 
+      ? "Aucune actualité pour le moment" 
+      : "لا توجد أخبار حالياً";
+    adminNews.innerHTML = `<div class="news-item">${noNewsMsg}</div>`;
+    return;
+  }
+  
+  news.forEach((n,i)=>{
+    const deleteText = currentLang === 'fr' ? "🗑️ Supprimer" : "🗑️ حذف";
+    const sectionText = currentLang === 'fr' ? "Section" : "القسم";
+    
+    adminNews.innerHTML += `
+      <div class="news-item">
+        <b>${n.text}</b><br>
+        <small><i class="far fa-calendar"></i> ${n.date}</small><br>
+        <small><i class="fas fa-tag"></i> ${sectionText}: ${getSectionName(n.section)}</small><br>
+        <button onclick="deleteNews(${i})">${deleteText}</button>
+      </div>
+    `;
+  });
+}
+
+function getSectionName(sectionKey) {
+  const sections = {
+    'fr': {
+      'home': 'Accueil',
+      'first1': 'Première 1',
+      'first2': 'Première 2',
+      'first3': 'Première 3',
+      'first4': 'Première 4',
+      'second1': 'Deuxième Sciences',
+      'second2': 'Deuxième Éco 1',
+      'second3': 'Deuxième Éco 2',
+      'second4': 'Deuxième Info',
+      'third1': 'Troisième Info',
+      'third2': 'Troisième Éco',
+      'bac1': 'Bac Éco 1',
+      'bac2': 'Bac Éco 2',
+      'bac3': 'Bac Sciences'
+    },
+    'ar': {
+      'home': 'الرئيسية',
+      'first1': 'أولى ثانوي 1',
+      'first2': 'أولى ثانوي 2',
+      'first3': 'أولى ثانوي 3',
+      'first4': 'أولى ثانوي 4',
+      'second1': 'ثانية علوم',
+      'second2': 'ثانية اقتصاد1',
+      'second3': 'ثانية اقتصاد2',
+      'second4': 'ثانية INFORMATIQUE',
+      'third1': 'ثالثة INFORMATIQUE',
+      'third2': 'ثالثة اقتصاد',
+      'bac1': 'باك اقتصاد1',
+      'bac2': 'باك اقتصاد2',
+      'bac3': 'باك علوم'
+    }
+  };
+  
+  return sections[currentLang][sectionKey] || sectionKey;
+}
+
+// Initialiser les textes
+updateTexts();
+</script>
+
+</body>
+</html>
