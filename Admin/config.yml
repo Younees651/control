@@ -1,6 +1,8 @@
 backend:
   name: git-gateway
+  repo:"Younees651/control"
   branch: main
+  auth_type:"token"
 
 media_folder: "images/uploads"
 public_folder: "/images/uploads"
@@ -15,3 +17,4 @@ collections:
       - {label: "Title", name: "title", widget: "string"}
       - {label: "Content", name: "body", widget: "text"}
       - {label: "Date", name: "date", widget: "datetime"}
+
