@@ -201,12 +201,15 @@
         <option value="first2" data-fr="Première 2" data-ar="أولى ثانوي 2">🎓 Première 2</option>
         <option value="first3" data-fr="Première 3" data-ar="أولى ثانوي 3">🎓 Première 3</option>
         <option value="first4" data-fr="Première 4" data-ar="أولى ثانوي 4">🎓 Première 4</option>
+      
         <option value="second1" data-fr="Deuxième Sciences" data-ar="ثانية علوم">📚 Deuxième Sciences</option>
         <option value="second2" data-fr="Deuxième Éco 1" data-ar="ثانية اقتصاد1">📚 Deuxième Éco 1</option>
         <option value="second3" data-fr="Deuxième Éco 2" data-ar="ثانية اقتصاد2">📚 Deuxième Éco 2</option>
         <option value="second4" data-fr="Deuxième Info" data-ar="ثانية INFORMATIQUE">📚 Deuxième Info</option>
+        
         <option value="third1" data-fr="Troisième Info" data-ar="ثالثة INFORMATIQUE">🌟 Troisième Info</option>
         <option value="third2" data-fr="Troisième Éco" data-ar="ثالثة اقتصاد">🌟 Troisième Éco</option>
+        
         <option value="bac1" data-fr="Bac Éco 1" data-ar="باك اقتصاد1">🏆 Bac Éco 1</option>
         <option value="bac2" data-fr="Bac Éco 2" data-ar="باك اقتصاد2">🏆 Bac Éco 2</option>
         <option value="bac3" data-fr="Bac Sciences" data-ar="باك علوم">🏆 Bac Sciences</option>
@@ -229,26 +232,6 @@
     </div>
   </div>
 </div>
-<script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
-
-  // Your web app's Firebase configuration
-  const firebaseConfig = {
-    apiKey: "AIzaSyBtS4FHFOTXeko-JqYTfXvQA5F_sL0xsKc",
-    authDomain: "lycee-news.firebaseapp.com",
-    projectId: "lycee-news",
-    storageBucket: "lycee-news.firebasestorage.app",
-    messagingSenderId: "478576117328",
-    appId: "1:478576117328:web:6b0e584e7e031cef363355"
-  };
-
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
-</script>
 <script>
 let currentLang = 'fr'; // Langue par défaut
 const ADMIN_CODE = "19202009"; // 🔐 Code d'accès
