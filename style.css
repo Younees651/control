@@ -308,16 +308,3 @@ h1 {
 [dir="rtl"] .news-item {
   text-align: right;
 }
-
-@media(max-width:768px) {
-
-  .welcome-icons{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  .icon-box{
-    width: 90%;
-    margin-bottom: 15px;
-  }
-}

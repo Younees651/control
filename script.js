@@ -1,4 +1,3 @@
-
 // Toggle les sous-sections
 function toggleSub(id){
   let el = document.getElementById(id);
@@ -14,7 +13,6 @@ function showSection(id){
 // Charger les actualités et les afficher par section
 function loadNews(){
   let news = JSON.parse(localStorage.getItem("news")) || [];
-  
 
   // Nettoyer toutes les listes
   let sectionIds = [

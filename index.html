@@ -178,20 +178,6 @@
     <section id="bac3" class="hidden"><h1 data-fr="Bac Sciences" data-ar="باك علوم">Bac Sciences</h1><div id="bac3News"></div></section>
   </main>
 </div>
-<div id="news-container"></div>
-
-<script>
-fetch('news.json')
-  .then(res => res.json())
-  .then(data => {
-    const container = document.getElementById('news-container');
-    data.forEach(item => {
-      const div = document.createElement('div');
-      div.innerHTML = `<h2>${item.title}</h2><p>${item.body}</p><small>${item.date}</small>`;
-      container.appendChild(div);
-    });
-  });
-</script>
 
 <script src="script.js"></script>
 <script>
